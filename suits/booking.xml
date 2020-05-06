@@ -1,0 +1,129 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Booking details">
+
+    <test name="BK-1:Creting booking with POST method and deposite paid is true">
+        <parameter name="baseURI" value="https://restful-booker.herokuapp.com/booking"/>
+        <parameter name="header_Content_Type" value="Content-Type"/>
+        <parameter name="header_application_json" value="application/json"/>
+        <parameter name="firstname" value="simran"/>
+        <parameter name="lastname" value="sande"/>
+        <parameter name="totalprice" value="111"/>
+        <parameter name="depositpaid" value="true"/>
+        <parameter name="checkin" value="2018-01-01"/>
+        <parameter name="checkout" value="2019-01-01"/>
+        <parameter name="additionalneeds" value="Breakfast"/>
+        <classes>
+            <class name="Booking">
+                <methods>
+                    <include name="createBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+    <test name="BK-4:GET request on booking id for getting the booking details of that perticular booking id">
+        <parameter name="baseURI" value="https://restful-booker.herokuapp.com/booking"/>
+        <parameter name="header_Content_Type" value="Content-Type"/>
+        <parameter name="header_application_json" value="application/json"/>
+        <parameter name="firstname" value="simran"/>
+        <parameter name="lastname" value="sande"/>
+        <parameter name="totalprice" value="111"/>
+        <parameter name="depositpaid" value="true"/>
+        <parameter name="checkin" value="2018-01-01"/>
+        <parameter name="checkout" value="2019-01-01"/>
+        <parameter name="additionalneeds" value="Breakfast"/>
+        <classes>
+            <class name="Booking">
+                <methods>
+                    <include name="getBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="BK-6:Partial Update a booking with booking id">
+        <parameter name="baseURI" value="https://restful-booker.herokuapp.com/booking"/>
+        <parameter name="header_Content_Type" value="Content-Type"/>
+        <parameter name="header_application_json" value="application/json"/>
+        <parameter name="Authorisation" value="Authorization"></parameter>
+        <parameter name="basicAuth" value="Basic YWRtaW46cGFzc3dvcmQxMjM="></parameter>
+        <parameter name="updated_firstname" value="manavi"/>
+        <parameter name="updated_lastname" value="aiyyer"/>
+        <classes>
+            <class name="Booking">
+                <methods>
+                    <include name="partialUpdateBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="BK-5:Update a booking with booking id which is created by post api">
+        <parameter name="baseURI" value="https://restful-booker.herokuapp.com/booking"/>
+        <parameter name="header_Content_Type" value="Content-Type"/>
+        <parameter name="header_application_json" value="application/json"/>
+        <parameter name="Authorisation" value="Authorization"></parameter>
+        <parameter name="basicAuth" value="Basic YWRtaW46cGFzc3dvcmQxMjM="></parameter>
+        <parameter name="updated_firstname" value="manavi"/>
+        <parameter name="updated_lastname" value="aiyyer"/>
+        <parameter name="updated_totalprice" value="1000"/>
+        <parameter name="updated_depositpaid" value="true"/>
+        <parameter name="updated_checkin" value="2018-01-03"/>
+        <parameter name="updated_checkout" value="2019-01-05"/>
+        <parameter name="updated_additionalneeds" value="Dinner"/>
+        <classes>
+            <class name="Booking">
+                <methods>
+                    <include name="updateBooking"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+
+    <test name="BK-2:Creting booking with POST method with wrong string as checkout dates. ex: checkout = XYZ --> negative test case">
+        <parameter name="baseURI" value="https://restful-booker.herokuapp.com/booking"/>
+        <parameter name="header_Content_Type" value="Content-Type"/>
+        <parameter name="header_application_json" value="application/json"/>
+        <parameter name="firstname" value="simran"/>
+        <parameter name="lastname" value="sande"/>
+        <parameter name="totalprice" value="111"/>
+        <parameter name="depositpaid" value="true"/>
+        <parameter name="checkin" value="2018-01-01"/>
+        <parameter name="checkout" value="XYZ"/>
+        <parameter name="additionalneeds" value="Breakfast"/>
+        <parameter name="invalid_date" value="Invalid date"></parameter>
+        <classes>
+            <class name="Booking">
+                <methods>
+                    <include name="createBookingWrongChekoutValue"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="BK-3:Creting booking with POST method with no details of checkout dates ->negative test case">
+        <parameter name="baseURI" value="https://restful-booker.herokuapp.com/booking"/>
+        <parameter name="header_Content_Type" value="Content-Type"/>
+        <parameter name="header_application_json" value="application/json"/>
+        <parameter name="firstname" value="simran"/>
+        <parameter name="lastname" value="sande"/>
+        <parameter name="totalprice" value="111"/>
+        <parameter name="depositpaid" value="true"/>
+        <parameter name="checkin" value="2018-01-01"/>
+        <parameter name="additionalneeds" value="Breakfast"/>
+        <parameter name="internal_server_error" value="Internal Server Error"></parameter>
+        <classes>
+            <class name="Booking">
+                <methods>
+                    <include name="createBookingWitNullParameter"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+
+</suite>
